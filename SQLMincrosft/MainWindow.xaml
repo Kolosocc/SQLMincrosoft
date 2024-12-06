@@ -1,0 +1,47 @@
+﻿<Window x:Class="DatabaseApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Работа с базой данных" Height="450" Width="800">
+    <Grid>
+        <!-- Главное меню -->
+        <Menu VerticalAlignment="Top">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Выход" Click="ExitMenuItem_Click"/>
+            </MenuItem>
+            <MenuItem Header="База данных">
+                <MenuItem Header="Подключиться" Click="ConnectMenuItem_Click"/>
+                <MenuItem Header="Выбрать базу данных" Click="SelectDatabaseMenuItem_Click"/>
+                <MenuItem Header="Обновить таблицы" Click="RefreshTablesMenuItem_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- Главное содержимое -->
+        <TabControl Name="MainTabControl" Margin="0,30,0,0">
+            <!-- Страница "Таблицы базы данных" -->
+            <TabItem Header="Таблицы">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox Name="TablesListBox" SelectionChanged="TablesListBox_SelectionChanged"/>
+                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                        <DataGrid Name="DataGridTableContent" AutoGenerateColumns="True" CanUserAddRows="True" CanUserDeleteRows="True" CellEditEnding="DataGridTableContent_CellEditEnding"/>
+                        <Button Content="Удалить выбранную строку" Click="DeleteSelectedRow_Click" Margin="5"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- Страница "Подробности таблицы" -->
+            <TabItem Header="Подробности таблицы">
+                <Grid>
+                    <TextBlock Name="PrimaryKeyTextBlock" Margin="10" Text="Первичный ключ: "/>
+                    <ListBox Name="IndexesListBox" Margin="10,30,10,10"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

@@ -1,0 +1,107 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "G:\\Three\\SQL\\SQLMincrosft\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|g:\\three\\sql\\sqlmincrosft\\sqlmincrosft\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|solutionrelative:sqlmincrosft\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|g:\\three\\sql\\sqlmincrosft\\sqlmincrosft\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|solutionrelative:sqlmincrosft\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|g:\\three\\sql\\sqlmincrosft\\sqlmincrosft\\dataaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|solutionrelative:sqlmincrosft\\dataaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|g:\\three\\sql\\sqlmincrosft\\sqlmincrosft\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|solutionrelative:sqlmincrosft\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|g:\\three\\sql\\sqlmincrosft\\sqlmincrosft\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|solutionrelative:sqlmincrosft\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "SQLMincrosft\\MainWindow.xaml.cs",
+              "ToolTip": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\MainWindow.xaml.cs*",
+              "RelativeToolTip": "SQLMincrosft\\MainWindow.xaml.cs*",
+              "ViewState": "AgIAAM4AAAAAAAAAAAAkwNYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-05T04:08:19.009Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "SQLMincrosft\\MainWindow.xaml",
+              "ToolTip": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\MainWindow.xaml",
+              "RelativeToolTip": "SQLMincrosft\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-12-05T04:19:43.893Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DataAccess.cs",
+              "DocumentMoniker": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\DataAccess.cs",
+              "RelativeDocumentMoniker": "SQLMincrosft\\DataAccess.cs",
+              "ToolTip": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\DataAccess.cs",
+              "RelativeToolTip": "SQLMincrosft\\DataAccess.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-05T04:08:06.557Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\App.xaml.cs",
+              "RelativeDocumentMoniker": "SQLMincrosft\\App.xaml.cs",
+              "ToolTip": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\App.xaml.cs",
+              "RelativeToolTip": "SQLMincrosft\\App.xaml.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-05T04:08:02.751Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AssemblyInfo.cs",
+              "DocumentMoniker": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\AssemblyInfo.cs",
+              "RelativeDocumentMoniker": "SQLMincrosft\\AssemblyInfo.cs",
+              "ToolTip": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\AssemblyInfo.cs",
+              "RelativeToolTip": "SQLMincrosft\\AssemblyInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-05T04:08:04.579Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
