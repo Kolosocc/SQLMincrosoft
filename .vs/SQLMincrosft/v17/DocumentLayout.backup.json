@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "G:\\Three\\SQL\\SQLMincrosft\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|g:\\three\\sql\\sqlmincrosft\\sqlmincrosft\\selectdatabasewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|solutionrelative:sqlmincrosft\\selectdatabasewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|g:\\three\\sql\\sqlmincrosft\\sqlmincrosft\\selectdatabasewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|solutionrelative:sqlmincrosft\\selectdatabasewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|g:\\three\\sql\\sqlmincrosft\\sqlmincrosft\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|solutionrelative:sqlmincrosft\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
@@ -15,16 +23,8 @@
       "RelativeMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|solutionrelative:sqlmincrosft\\addnewitemwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|g:\\three\\sql\\sqlmincrosft\\sqlmincrosft\\selectdatabasewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|solutionrelative:sqlmincrosft\\selectdatabasewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|g:\\three\\sql\\sqlmincrosft\\sqlmincrosft\\addnewitemwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|solutionrelative:sqlmincrosft\\addnewitemwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|g:\\three\\sql\\sqlmincrosft\\sqlmincrosft\\selectdatabasewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|solutionrelative:sqlmincrosft\\selectdatabasewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D76C9A41-E144-45AE-863F-51DACCFBFE46}|SQLMincrosft\\SQLMincrosft.csproj|g:\\three\\sql\\sqlmincrosft\\sqlmincrosft\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -50,20 +50,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AddNewItemWindow.xaml.cs",
-              "DocumentMoniker": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\AddNewItemWindow.xaml.cs",
-              "RelativeDocumentMoniker": "SQLMincrosft\\AddNewItemWindow.xaml.cs",
-              "ToolTip": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\AddNewItemWindow.xaml.cs",
-              "RelativeToolTip": "SQLMincrosft\\AddNewItemWindow.xaml.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAQwDQAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T07:09:23.537Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "SQLMincrosft\\MainWindow.xaml.cs",
@@ -71,24 +58,22 @@
               "RelativeToolTip": "SQLMincrosft\\MainWindow.xaml.cs",
               "ViewState": "AgIAAFgBAAAAAAAAAAAtwFQBAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-05T04:08:19.009Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-05T04:08:19.009Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "AddNewItemWindow.xaml",
               "DocumentMoniker": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\AddNewItemWindow.xaml",
               "RelativeDocumentMoniker": "SQLMincrosft\\AddNewItemWindow.xaml",
               "ToolTip": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\AddNewItemWindow.xaml",
               "RelativeToolTip": "SQLMincrosft\\AddNewItemWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-06T07:08:59.414Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-06T07:08:59.414Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\MainWindow.xaml",
               "RelativeDocumentMoniker": "SQLMincrosft\\MainWindow.xaml",
@@ -100,28 +85,40 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "SelectDatabaseWindow.xaml.cs",
               "DocumentMoniker": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\SelectDatabaseWindow.xaml.cs",
               "RelativeDocumentMoniker": "SQLMincrosft\\SelectDatabaseWindow.xaml.cs",
-              "ToolTip": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\SelectDatabaseWindow.xaml.cs",
-              "RelativeToolTip": "SQLMincrosft\\SelectDatabaseWindow.xaml.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAwBQAAAABAAAAAAAAAA==",
+              "ToolTip": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\SelectDatabaseWindow.xaml.cs*",
+              "RelativeToolTip": "SQLMincrosft\\SelectDatabaseWindow.xaml.cs*",
+              "ViewState": "AgIAACYAAAAAAAAAAAAowD8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-12T03:53:47.121Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "SelectDatabaseWindow.xaml",
               "DocumentMoniker": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\SelectDatabaseWindow.xaml",
               "RelativeDocumentMoniker": "SQLMincrosft\\SelectDatabaseWindow.xaml",
-              "ToolTip": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\SelectDatabaseWindow.xaml",
-              "RelativeToolTip": "SQLMincrosft\\SelectDatabaseWindow.xaml",
+              "ToolTip": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\SelectDatabaseWindow.xaml*",
+              "RelativeToolTip": "SQLMincrosft\\SelectDatabaseWindow.xaml*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2024-12-12T03:53:31.872Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AddNewItemWindow.xaml.cs",
+              "DocumentMoniker": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\AddNewItemWindow.xaml.cs",
+              "RelativeDocumentMoniker": "SQLMincrosft\\AddNewItemWindow.xaml.cs",
+              "ToolTip": "G:\\Three\\SQL\\SQLMincrosft\\SQLMincrosft\\AddNewItemWindow.xaml.cs",
+              "RelativeToolTip": "SQLMincrosft\\AddNewItemWindow.xaml.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAQwDQAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-06T07:09:23.537Z"
             },
             {
               "$type": "Document",

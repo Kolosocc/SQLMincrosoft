@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SQLMincrosft")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f079d1bdd96412a2594dd9531a6f6aa9d5f79903")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c57bee0ff6953a24b77d678b1597c730bb8e7d73")]
 [assembly: System.Reflection.AssemblyProductAttribute("SQLMincrosft")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SQLMincrosft")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
