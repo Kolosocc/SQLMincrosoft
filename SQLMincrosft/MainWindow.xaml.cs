@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Data;
-using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using Microsoft.Data.SqlClient;
 
 namespace DatabaseApp
 {
@@ -11,7 +12,7 @@ namespace DatabaseApp
     {
         private string currentConnectionString;
         private SqlConnection sqlConnection;
-        private bool isEditing = false; // Флаг для предотвращения рекурсивных вызовов
+        private bool isEditing = false;
 
         public MainWindow()
         {
@@ -19,6 +20,79 @@ namespace DatabaseApp
             currentConnectionString = "Data Source=DBSRV\\ag2024;Initial Catalog=KolosovDA_2207_g2_lab16;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
             sqlConnection = new SqlConnection(currentConnectionString);
         }
+
+        private void LoadTableDetails(string tableName)
+        {
+            try
+            {
+                // Загружаем информацию о первичном ключе
+                string primaryKeyQuery = @"
+            SELECT COLUMN_NAME
+            FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = @tableName AND CONSTRAINT_NAME LIKE 'PK%'";
+
+                SqlCommand primaryKeyCommand = new SqlCommand(primaryKeyQuery, sqlConnection);
+                primaryKeyCommand.Parameters.AddWithValue("@tableName", tableName);
+
+                SqlDataReader reader = primaryKeyCommand.ExecuteReader();
+                if (reader.Read())
+                {
+                    PrimaryKeyTextBlock.Text = "Первичный ключ: " + reader.GetString(0);
+                }
+                else
+                {
+                    PrimaryKeyTextBlock.Text = "Первичный ключ: Не найден";
+                }
+
+                reader.Close();
+
+                // Загружаем информацию о внешних ключах
+                string foreignKeyQuery = @"
+            SELECT kcu.COLUMN_NAME, ccu.TABLE_NAME AS REFERENCED_TABLE, ccu.COLUMN_NAME AS REFERENCED_COLUMN
+            FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE kcu
+            JOIN INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS rc ON kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+            JOIN INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE ccu ON rc.UNIQUE_CONSTRAINT_NAME = ccu.CONSTRAINT_NAME
+            WHERE kcu.TABLE_NAME = @tableName";
+
+                SqlCommand foreignKeyCommand = new SqlCommand(foreignKeyQuery, sqlConnection);
+                foreignKeyCommand.Parameters.AddWithValue("@tableName", tableName);
+
+                SqlDataReader foreignKeyReader = foreignKeyCommand.ExecuteReader();
+                List<string> foreignKeys = new List<string>();
+                while (foreignKeyReader.Read())
+                {
+                    string foreignKey = $"Столбец: {foreignKeyReader["COLUMN_NAME"]}, " +
+                                        $"Ссылается на таблицу: {foreignKeyReader["REFERENCED_TABLE"]}, " +
+                                        $"Столбец: {foreignKeyReader["REFERENCED_COLUMN"]}";
+                    foreignKeys.Add(foreignKey);
+                }
+
+                // Отображаем внешний ключ
+                IndexesListBox.Items.Clear();
+                if (foreignKeys.Count > 0)
+                {
+                    foreach (string foreignKey in foreignKeys)
+                    {
+                        IndexesListBox.Items.Add(foreignKey);
+                    }
+                }
+                else
+                {
+                    IndexesListBox.Items.Add("Внешние ключи не найдены");
+                }
+
+                foreignKeyReader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при загрузке информации о ключах: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+
+
+
+
 
         private void ConnectMenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -42,107 +116,32 @@ namespace DatabaseApp
             }
         }
 
-        private void DataGridTableContent_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            if (isEditing || e.EditAction != DataGridEditAction.Commit || TablesListBox.SelectedItem == null)
-                return;
-
-            try
-            {
-                isEditing = true; // Устанавливаем флаг, чтобы предотвратить рекурсию
-
-                // Применяем изменения
-                DataGridTableContent.CommitEdit(DataGridEditingUnit.Row, true);
-
-                var editedRow = (DataRowView)e.Row.Item;
-                string tableName = TablesListBox.SelectedItem.ToString();
-                string primaryKeyColumn = PrimaryKeyTextBlock.Text.Replace("Первичный ключ: ", "").Split(',')[0].Trim();
-                string primaryKeyValue = editedRow[primaryKeyColumn].ToString();
-
-                var updateColumns = string.Join(", ", editedRow.Row.Table.Columns.Cast<DataColumn>()
-                    .Where(column => column.ColumnName != primaryKeyColumn)
-                    .Select(column => $"{column.ColumnName} = @{column.ColumnName}"));
-
-                string updateQuery = $"UPDATE [{tableName}] SET {updateColumns} WHERE {primaryKeyColumn} = @{primaryKeyColumn}";
-
-                using (SqlCommand command = new SqlCommand(updateQuery, sqlConnection))
-                {
-                    foreach (DataColumn column in editedRow.Row.Table.Columns)
-                    {
-                        command.Parameters.AddWithValue($"@{column.ColumnName}", editedRow[column.ColumnName] ?? DBNull.Value);
-                    }
-
-                    command.ExecuteNonQuery();
-                    MessageBox.Show("Изменения сохранены!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка сохранения изменений: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            finally
-            {
-                isEditing = false; // Сбрасываем флаг
-            }
-        }
-
-        private void DeleteSelectedRow_Click(object sender, RoutedEventArgs e)
-        {
-            if (DataGridTableContent.SelectedItem == null || TablesListBox.SelectedItem == null)
-            {
-                MessageBox.Show("Выберите строку и таблицу для удаления.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            try
-            {
-                var selectedRow = (DataRowView)DataGridTableContent.SelectedItem;
-                string tableName = TablesListBox.SelectedItem.ToString();
-                string primaryKeyColumn = PrimaryKeyTextBlock.Text.Replace("Первичный ключ: ", "").Split(',')[0].Trim();
-                string primaryKeyValue = selectedRow[primaryKeyColumn].ToString();
-
-                string deleteQuery = $"DELETE FROM [{tableName}] WHERE {primaryKeyColumn} = @{primaryKeyColumn}";
-
-                using (SqlCommand command = new SqlCommand(deleteQuery, sqlConnection))
-                {
-                    command.Parameters.AddWithValue($"@{primaryKeyColumn}", primaryKeyValue);
-                    command.ExecuteNonQuery();
-                }
-
-                MessageBox.Show("Строка удалена!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                LoadTableContent(tableName);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка удаления строки: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
         private void SelectDatabaseMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Вы хотите подключиться к базе данных lab16? Нажмите 'Да' для lab16 или 'Нет' для lab15.3.", "Выбор базы данных", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            currentConnectionString = result == MessageBoxResult.Yes
-                ? "Data Source=DBSRV\\ag2024;Initial Catalog=KolosovDA_2207_g2_lab16;Integrated Security=True;Encrypt=True;TrustServerCertificate=True"
-                : "Data Source=DBSRV\\ag2024;Initial Catalog=KolosovDA_2207_g2_lab15.3;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
-
-            if (sqlConnection.State == ConnectionState.Open)
+            var selectDatabaseWindow = new SelectDatabaseWindow();
+            if (selectDatabaseWindow.ShowDialog() == true)
             {
-                sqlConnection.Close();
-            }
+                currentConnectionString = selectDatabaseWindow.SelectedConnectionString;
+                if (sqlConnection.State == ConnectionState.Open)
+                {
+                    sqlConnection.Close();
+                }
 
-            try
-            {
-                sqlConnection.ConnectionString = currentConnectionString;
-                sqlConnection.Open();
-                MessageBox.Show($"Подключение к базе данных: {currentConnectionString.Split(';')[1].Split('=')[1]}", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
-                LoadTables();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка подключения: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                try
+                {
+                    sqlConnection.ConnectionString = currentConnectionString;
+                    sqlConnection.Open();
+                    MessageBox.Show("Подключение установлено!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    LoadTables();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка подключения: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
+
+        private void RefreshTablesMenuItem_Click(object sender, RoutedEventArgs e) => LoadTables();
 
         private void LoadTables()
         {
@@ -154,32 +153,29 @@ namespace DatabaseApp
 
             try
             {
-                DataTable schemaTable = sqlConnection.GetSchema("Tables");
-                TablesListBox.Items.Clear();
+                SqlCommand cmd = new SqlCommand(
+                    "SELECT TABLE_SCHEMA, TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'",
+                    sqlConnection);
+                SqlDataReader reader = cmd.ExecuteReader();
 
-                foreach (DataRow row in schemaTable.Rows)
+                TablesListBox.Items.Clear();
+                while (reader.Read())
                 {
-                    string tableName = row["TABLE_NAME"] as string;
-                    if (tableName != null)
-                    {
-                        TablesListBox.Items.Add(tableName);
-                    }
+                    string schema = reader.GetString(0);
+                    string tableName = reader.GetString(1);
+                    TablesListBox.Items.Add($"{schema}.{tableName}");
+                }
+
+                reader.Close();
+
+                if (TablesListBox.Items.Count == 0)
+                {
+                    MessageBox.Show("В базе данных нет доступных таблиц.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка загрузки таблиц: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        private void TablesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (TablesListBox.SelectedItem == null) return;
-
-            string tableName = TablesListBox.SelectedItem.ToString();
-            if (!string.IsNullOrEmpty(tableName))
-            {
-                LoadTableContent(tableName);
             }
         }
 
@@ -193,64 +189,170 @@ namespace DatabaseApp
 
             try
             {
-                string query = $"SELECT * FROM [{tableName}]";
-                SqlDataAdapter adapter = new SqlDataAdapter(query, sqlConnection);
+                // Загружаем данные из выбранной таблицы
+                string query = $"SELECT * FROM {tableName}";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(query, sqlConnection);
                 DataTable dataTable = new DataTable();
-                adapter.Fill(dataTable);
+                dataAdapter.Fill(dataTable);
 
-                DataGridTableContent.ItemsSource = null;
+                // Привязываем DataTable к DataGrid
                 DataGridTableContent.ItemsSource = dataTable.DefaultView;
-
-                LoadTableDetails(tableName);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка загрузки данных таблицы: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void RefreshTablesMenuItem_Click(object sender, RoutedEventArgs e)
+
+        private void CreateNewItem_Click(object sender, RoutedEventArgs e)
         {
-            LoadTables();
+            if (TablesListBox.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите таблицу перед добавлением новой записи.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            string selectedTable = TablesListBox.SelectedItem.ToString().Split('.').Last();
+            var addNewItemWindow = new AddNewItemWindow(selectedTable, sqlConnection);
+            addNewItemWindow.ShowDialog();
+
+            // Перезагрузить данные после добавления
+            LoadTableContent(selectedTable);
         }
 
+        private void DataGridTableContent_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            if (!isEditing && e.Row.Item is DataRowView rowView)
+            {
+                isEditing = true;
 
-        private void LoadTableDetails(string tableName)
+                // Получаем имя таблицы
+                string tableName = TablesListBox.SelectedItem.ToString().Split('.').Last();
+
+                // Получаем имя первого столбца таблицы
+                string firstColumnName = GetFirstColumnName(tableName);
+
+                if (firstColumnName == null)
+                {
+                    MessageBox.Show("Не удалось определить имя первого столбца таблицы.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    isEditing = false;
+                    return;
+                }
+
+                // Получаем ID из строки
+                int id = Convert.ToInt32(rowView[firstColumnName]);
+
+                // Пытаемся получить имя столбца, который редактируем
+                if (e.Column is DataGridBoundColumn boundColumn)
+                {
+                    string editedColumnName = ((Binding)boundColumn.Binding).Path.Path;
+
+                    // Получаем новое значение из редактируемого элемента (например, TextBox)
+                    object newValue = ((TextBox)e.EditingElement).Text;
+
+                    try
+                    {
+                        // Обновляем данные в базе данных
+                        string query = $"UPDATE {tableName} SET {editedColumnName} = @newValue WHERE {firstColumnName} = @id";
+                        SqlCommand command = new SqlCommand(query, sqlConnection);
+                        command.Parameters.AddWithValue("@newValue", newValue);
+                        command.Parameters.AddWithValue("@id", id);
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Ошибка при обновлении данных: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+
+                isEditing = false;
+            }
+        }
+
+        private string GetFirstColumnName(string tableName)
         {
             try
             {
-                DataTable primaryKeyTable = sqlConnection.GetSchema("IndexColumns", new[] { null, null, tableName });
-                string primaryKey = string.Join(", ", primaryKeyTable.Rows.Cast<DataRow>().Select(row => row["COLUMN_NAME"].ToString()));
-                PrimaryKeyTextBlock.Text = $"Первичный ключ: {primaryKey}";
+                // Запрос для получения имени первого столбца
+                string query = $@"
+            SELECT COLUMN_NAME 
+            FROM INFORMATION_SCHEMA.COLUMNS 
+            WHERE TABLE_NAME = @tableName 
+            ORDER BY ORDINAL_POSITION 
+            OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY";
 
-                IndexesListBox.Items.Clear();
-                DataTable indexesTable = sqlConnection.GetSchema("Indexes", new[] { null, null, tableName });
-                foreach (DataRow row in indexesTable.Rows)
-                {
-                    IndexesListBox.Items.Add(row["INDEX_NAME"].ToString());
-                }
+                SqlCommand command = new SqlCommand(query, sqlConnection);
+                command.Parameters.AddWithValue("@tableName", tableName);
+
+                // Выполняем запрос и получаем имя первого столбца
+                object result = command.ExecuteScalar();
+
+                return result?.ToString();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка получения информации о таблице: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Ошибка при получении первого столбца: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
             }
         }
-
-        private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
+        private void DeleteSelectedRow_Click(object sender, RoutedEventArgs e)
         {
-            if (sqlConnection != null && sqlConnection.State == ConnectionState.Open)
+            if (TablesListBox.SelectedItem == null)
             {
-                sqlConnection.Close();
+                MessageBox.Show("Выберите таблицу перед удалением записи.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
 
-            Application.Current.Shutdown();
+            if (DataGridTableContent.SelectedItem is DataRowView rowView)
+            {
+                string tableName = TablesListBox.SelectedItem.ToString().Split('.').Last();
+
+                // Получаем имя первого столбца, который будет использоваться как ID
+                string firstColumnName = GetFirstColumnName(tableName);
+
+                if (firstColumnName == null)
+                {
+                    MessageBox.Show("Не удалось определить имя первого столбца таблицы.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                try
+                {
+                    // Получаем значение ID из первой колонки
+                    int id = Convert.ToInt32(rowView[firstColumnName]);
+
+                    // Формируем SQL запрос для удаления записи
+                    string query = $"DELETE FROM {tableName} WHERE {firstColumnName} = @id";
+                    SqlCommand command = new SqlCommand(query, sqlConnection);
+                    command.Parameters.AddWithValue("@id", id);
+                    command.ExecuteNonQuery();
+
+                    MessageBox.Show("Запись успешно удалена.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    // Перезагружаем таблицу после удаления записи
+                    LoadTableContent(tableName);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при удалении записи: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите запись для удаления.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
-        private void DataGridTableContent_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void TablesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (DataGridTableContent.SelectedItem is DataRowView selectedRow)
+            if (TablesListBox.SelectedItem != null)
             {
-                MessageBox.Show($"Вы выбрали строку: {string.Join(", ", selectedRow.Row.ItemArray)}", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                string selectedTable = TablesListBox.SelectedItem.ToString().Split('.').Last();
+                LoadTableContent(selectedTable);
+                LoadTableDetails(selectedTable);
             }
         }
+
+        private void ExitMenuItem_Click(object sender, RoutedEventArgs e) => Application.Current.Shutdown();
     }
 }

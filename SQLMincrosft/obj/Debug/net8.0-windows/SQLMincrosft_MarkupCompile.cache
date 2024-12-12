@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 G:\Three\SQL\SQLMincrosft\SQLMincrosft\App.xaml
-11407045341
+31763370809
 
-5671761466
+61667006503
 2151379363425
-MainWindow.xaml;
+AddNewItemWindow.xaml;MainWindow.xaml;SelectDatabaseWindow.xaml;
 
 False
 

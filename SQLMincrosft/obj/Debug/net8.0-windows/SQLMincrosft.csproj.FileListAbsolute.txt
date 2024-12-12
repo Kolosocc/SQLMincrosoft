@@ -59,3 +59,8 @@ G:\Three\SQL\SQLMincrosft\SQLMincrosft\bin\Debug\net8.0-windows\runtimes\win-arm
 G:\Three\SQL\SQLMincrosft\SQLMincrosft\bin\Debug\net8.0-windows\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 G:\Three\SQL\SQLMincrosft\SQLMincrosft\bin\Debug\net8.0-windows\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 G:\Three\SQL\SQLMincrosft\SQLMincrosft\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Runtime.Caching.dll
+G:\Three\SQL\SQLMincrosft\SQLMincrosft\obj\Debug\net8.0-windows\AddNewItemWindow.baml
+G:\Three\SQL\SQLMincrosft\SQLMincrosft\obj\Debug\net8.0-windows\AddNewItemWindow.g.cs
+G:\Three\SQL\SQLMincrosft\SQLMincrosft\obj\Debug\net8.0-windows\SQLMincrosft.sourcelink.json
+G:\Three\SQL\SQLMincrosft\SQLMincrosft\obj\Debug\net8.0-windows\SelectDatabaseWindow.baml
+G:\Three\SQL\SQLMincrosft\SQLMincrosft\obj\Debug\net8.0-windows\SelectDatabaseWindow.g.cs
